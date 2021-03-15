@@ -18,6 +18,8 @@
 // Select element
 const hexInput = document.querySelector('#hexInput')
 const inputColor = document.querySelector('#inputColor')
+const slider = document.querySelector('#slider')
+const sliderText = document.querySelector('#sliderText')
 
 //add eventListener
 hexInput.addEventListener('keyup', checkHexInput)
@@ -93,3 +95,16 @@ const convertRgbToHex = (r,g,b) => {
     return hex
 }
 //console.log(convertRgbToHex(0,255,255))
+
+
+// Chalenge 4
+//get a reference to the slider and sliderText DOM elements
+//create an input event listener for slider element
+//display the value of the slider 
+
+slider.addEventListener('input', checkSlider)
+
+function checkSlider() {
+
+    sliderText.textContent=`${slider.value + "%"}`
+}
