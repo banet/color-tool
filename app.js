@@ -38,10 +38,58 @@ const isValidHex = (hex) => {
     const strippedHex = hex.replace('#', '')
     return strippedHex.length === 3 || strippedHex.length === 6
 }
+/* Test
+ console.log(isValidHex("#000000"))  true
+ console.log(isValidHex("#0000000"))  false
+ console.log(isValidHex("#ffffff"))  true
+ console.log(isValidHex("#fff"))  true
+ console.log(isValidHex("fff"))  true
+ console.log(isValidHex("ac")) // false 
+ */
 
-// console.log(isValidHex("#000000")) // true
-// console.log(isValidHex("#0000000")) // false
-// console.log(isValidHex("#ffffff")) // true
-// console.log(isValidHex("#fff")) // true
-// console.log(isValidHex("fff")) // true
-// console.log(isValidHex("ac")) // false
+/* Challenge2 
+ -Create a function to convert Hex to RGB
+- this should work with 3 or 6 character hex values
+- Hint - useParseInt(16) to convert a hex value to a decimal value
+- should return an object with 3 properties - r,g, and b
+ - Test your function with a few different use cases */
+
+const convertHextoRgb = (hex) => {
+
+    if(!isValidHex(hex)) return null;
+
+    let strippedHex = hex.replace('#', '')
+
+    if(strippedHex.length === 3) {
+    strippedHex = strippedHex[0] + strippedHex[0]
+    + strippedHex[1] + strippedHex[1]
+    + strippedHex[2] + strippedHex[2]
+    }
+    // Define rgb
+
+    const r = parseInt(strippedHex.substring(0,2), 16)
+    const g = parseInt(strippedHex.substring(2,4), 16)
+    const b = parseInt(strippedHex.substring(4,6), 16)
+
+    return {r,g,b}
+}
+console.log(convertHextoRgb('123'))
+
+/**Challenge 3 
+ - create function convertRgbtoHex
+ - taks 3 paramenter r,g,b
+ - for each (r,g,b) create a hex pair that is two characters long
+ - return hex value startin with a hashtag
+ - example - r.toString(16)
+*/
+const convertRgbToHex = (r,g,b) => {
+   
+
+    const firstPair = ("0"+ r.toString(16)).slice(-2)
+    const secondtPair = ("0" + g.toString(16)).slice(-2)
+    const thirdPair = ("0" + b.toString(16)).slice(-2)
+
+    const hex = "#" + firstPair + secondtPair + thirdPair
+    return hex
+}
+//console.log(convertRgbToHex(0,255,255))
