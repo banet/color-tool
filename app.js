@@ -105,6 +105,42 @@ const convertRgbToHex = (r,g,b) => {
 slider.addEventListener('input', checkSlider)
 
 function checkSlider() {
-
+    // Check if the hex color valid
     sliderText.textContent=`${slider.value + "%"}`
+    // get the altered hex value
 }
+
+/* Challenge 5 
+Create the alterColor function which accepts hex value and percentage
+convert the hex value to rgb
+increase each r,g,b value by appropriate amount (percentage of 255)
+use the new r,g,b values to convert to a hex value
+return the hex value
+*/
+
+// Create a function for range between 0 -255
+const increaseWithin0To255 = (hex, amount) => {
+    // const newHex = hex + amount
+    // if(newHex > 255) return 255
+    // if(newHex < 0) return 0
+    // return newHex
+    return Math.min(255, Math.max(0, hex + amount))
+}
+
+const alterColor = (hex, percentage ) => {
+    const {r,g,b} = convertHextoRgb(hex)
+
+    const amount = Math.floor((percentage/100)*255)
+
+   const newR = increaseWithin0To255(r, amount)
+   const newG = increaseWithin0To255(g,amount)
+   const newB = increaseWithin0To255(b,amount)
+   //console.log(newR, newG,newB)
+   return convertRgbToHex(newR, newG, newB)
+}
+
+console.log(alterColor('#000', 10))
+
+
+
+alterColor('fff', 10)
