@@ -20,7 +20,8 @@ const hexInput = document.querySelector('#hexInput')
 const inputColor = document.querySelector('#inputColor')
 const slider = document.querySelector('#slider')
 const sliderText = document.querySelector('#sliderText')
-
+const alterBox = document.querySelector('#alteredColor')
+const alterColoText = document.querySelector('#alteredColorText')
 //add eventListener
 hexInput.addEventListener('keyup', checkHexInput)
 
@@ -75,7 +76,7 @@ const convertHextoRgb = (hex) => {
 
     return {r,g,b}
 }
-console.log(convertHextoRgb('123'))
+//console.log(convertHextoRgb('123'))
 
 /**Challenge 3 
  - create function convertRgbtoHex
@@ -106,8 +107,13 @@ slider.addEventListener('input', checkSlider)
 
 function checkSlider() {
     // Check if the hex color valid
+    if(!isValidHex(hexInput.value)) return;
     sliderText.textContent=`${slider.value + "%"}`
-    // get the altered hex value
+    // get the altered hex value (call altere functiopn and update altered box)
+    const alterHex = alterColor(hexInput.value, slider.value)
+    // update the color
+    alterBox.style.backgroundColor =alterHex
+    alterColoText.innerText = `Altered Color  ${alterHex}` 
 }
 
 /* Challenge 5 
@@ -139,8 +145,8 @@ const alterColor = (hex, percentage ) => {
    return convertRgbToHex(newR, newG, newB)
 }
 
-console.log(alterColor('#000', 10))
+//console.log(alterColor('#000', 10))
 
 
 
-alterColor('fff', 10)
+//alterColor('fff', 10)
