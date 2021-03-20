@@ -22,6 +22,11 @@ const slider = document.querySelector('#slider')
 const sliderText = document.querySelector('#sliderText')
 const alterBox = document.querySelector('#alteredColor')
 const alterColoText = document.querySelector('#alteredColorText')
+const toggleBtn = document.querySelector(".toggle-btn")
+const innerBtn = document.querySelector('.inner-circle')
+const container = document.querySelector('.container')
+const lighteText = document.querySelector('.lighten')
+const darkenText = document.querySelector('.darken')
 //add eventListener
 hexInput.addEventListener('keyup', checkHexInput)
 
@@ -111,7 +116,7 @@ function checkSlider() {
     sliderText.textContent=`${slider.value + "%"}`
     // get the altered hex value (call altere functiopn and update altered box)
     const alterHex = alterColor(hexInput.value, slider.value)
-    // update the color
+    // update the backgrundcolor on alterBox
     alterBox.style.backgroundColor =alterHex
     alterColoText.innerText = `Altered Color  ${alterHex}` 
 }
@@ -147,6 +152,31 @@ const alterColor = (hex, percentage ) => {
 
 //console.log(alterColor('#000', 10))
 
-
-
 //alterColor('fff', 10)
+
+// Toggle button
+
+toggleBtn.addEventListener('click', toggleButton)
+
+function toggleButton() {
+    
+    if(innerBtn.classList.contains('change')) {
+       // lighteText.classList.add('uselected')
+        innerBtn.classList.remove('change')
+        lighteText.classList.remove('unselected')
+        darkenText.classList.add('unselected')
+
+    }
+    else {
+        innerBtn.classList.add('change')
+        lighteText.classList.add('unselected')
+        darkenText.classList.remove('unselected')
+        
+    }
+        
+    }
+
+    // innerBtn.classList.toggle('change')
+    // container.classList.add('light')
+    
+
