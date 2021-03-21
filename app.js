@@ -1,17 +1,50 @@
 
 
-
-// check to see whether the inpput from the user is a valid
-// hex color
-
 //1. flexibility to user to put #000000 or 000000 remove if exissst "#"
 // check the length -should be either 3 or 6 characters
 
-//CHALLENGE
-//Get a reference to hexInput and inputColor DOM elements
-//Create a keyup event handler for hexInput
-//Check if hex color is valid
-//If hex color is valid, update the background color of inputColor
+/* CHALLENGE 1
+* Get a reference to hexInput and inputColor DOM elements
+* Create a keyup event handler for hexInputCheck if hex color is valid
+* If hex color is valid, update the background color of inputColor 
+*/
+/* Challenge2 
+ -Create a function to convert Hex to RGB
+- this should work with 3 or 6 character hex values
+- Hint - useParseInt(16) to convert a hex value to a decimal value
+- should return an object with 3 properties - r,g, and b
+ - Test your function with a few different use cases 
+ */
+
+/**Challenge 3 
+ - create function convertRgbtoHex
+ - taks 3 paramenter r,g,b
+ - for each (r,g,b) create a hex pair that is two characters long
+ - return hex value startin with a hashtag
+ - example - r.toString(16)
+*/
+/*Chalenge 4
+* get a reference to the slider and sliderText DOM elements
+* create an input event listener for slider element
+* display the value of the slider 
+*/
+
+/* Challenge 5 
+Create the alterColor function which accepts hex value and percentage
+convert the hex value to rgb
+increase each r,g,b value by appropriate amount (percentage of 255)
+use the new r,g,b values to convert to a hex value
+return the hex value
+*/
+/*Challenge 6 RESET FUNCTION
+ * Set slider value to 0 and slidet text to 0%
+ * Set altered color to original input color
+ * Reset alteredColorText to original input
+ * call reset in toggleBtn click handler
+ * call reset in hexInput keyup handler
+ * 
+ */
+
 
 
 // Select element
@@ -26,6 +59,7 @@ const innerBtn = document.querySelector('.inner-circle')
 const container = document.querySelector('.container')
 const lighteText = document.querySelector('.lighten')
 const darkenText = document.querySelector('.darken')
+
 //add eventListener
 hexInput.addEventListener('keyup', checkHexInput)
 
@@ -36,6 +70,7 @@ function checkHexInput() {
     const strippedHex = hex.replace('#', '')
 
     inputColor.style.background = "#" + strippedHex
+    resetSlider()
 }
 
 
@@ -45,21 +80,9 @@ const isValidHex = (hex) => {
     const strippedHex = hex.replace('#', '')
     return strippedHex.length === 3 || strippedHex.length === 6
 }
-/* Test
- console.log(isValidHex("#000000"))  true
- console.log(isValidHex("#0000000"))  false
- console.log(isValidHex("#ffffff"))  true
- console.log(isValidHex("#fff"))  true
- console.log(isValidHex("fff"))  true
- console.log(isValidHex("ac")) // false 
- */
 
-/* Challenge2 
- -Create a function to convert Hex to RGB
-- this should work with 3 or 6 character hex values
-- Hint - useParseInt(16) to convert a hex value to a decimal value
-- should return an object with 3 properties - r,g, and b
- - Test your function with a few different use cases */
+
+
 
 const convertHextoRgb = (hex) => {
 
@@ -82,13 +105,7 @@ const convertHextoRgb = (hex) => {
 }
 //console.log(convertHextoRgb('123'))
 
-/**Challenge 3 
- - create function convertRgbtoHex
- - taks 3 paramenter r,g,b
- - for each (r,g,b) create a hex pair that is two characters long
- - return hex value startin with a hashtag
- - example - r.toString(16)
-*/
+
 const convertRgbToHex = (r,g,b) => {
    
 
@@ -102,10 +119,6 @@ const convertRgbToHex = (r,g,b) => {
 //console.log(convertRgbToHex(0,255,255))
 
 
-// Chalenge 4
-//get a reference to the slider and sliderText DOM elements
-//create an input event listener for slider element
-//display the value of the slider 
 
 slider.addEventListener('input', checkSlider)
 
@@ -127,15 +140,17 @@ function checkSlider() {
     // update the backgrundcolor on alterBox
     alterBox.style.backgroundColor =alterHex
     alterColoText.innerText = `Altered Color ${alterHex}` 
+
 }
 
-/* Challenge 5 
-Create the alterColor function which accepts hex value and percentage
-convert the hex value to rgb
-increase each r,g,b value by appropriate amount (percentage of 255)
-use the new r,g,b values to convert to a hex value
-return the hex value
-*/
+
+function resetSlider() {
+    slider.value=0;
+    sliderText.textContent = `0%`
+    alterBox.style.backgroundColor = hexInput.value;
+    alterColoText.innerText = `Altered Color ${hexInput.value}` 
+
+}
 
 // Create a function for range between 0 -255
 const increaseWithin0To255 = (hex, amount) => {
@@ -158,10 +173,6 @@ const alterColor = (hex, percentage ) => {
    return convertRgbToHex(newR, newG, newB)
 }
 
-//console.log(alterColor('#000', 10))
-
-//alterColor('fff', 10)
-
 // Toggle button
 
 toggleBtn.addEventListener('click', changeButton)
@@ -181,10 +192,7 @@ function changeButton() {
         darkenText.classList.remove('unselected')
         
     }
-        
-    }
+        resetSlider() 
+}
 
-    // innerBtn.classList.toggle('change')
-    // container.classList.add('light')
-    
-
+ 
