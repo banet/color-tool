@@ -1,6 +1,5 @@
 
 
-// javascript
 
 // check to see whether the inpput from the user is a valid
 // hex color
@@ -22,7 +21,7 @@ const slider = document.querySelector('#slider')
 const sliderText = document.querySelector('#sliderText')
 const alterBox = document.querySelector('#alteredColor')
 const alterColoText = document.querySelector('#alteredColorText')
-const toggleBtn = document.querySelector(".toggle-btn")
+const toggleBtn = document.querySelector("#toggleBtn")
 const innerBtn = document.querySelector('.inner-circle')
 const container = document.querySelector('.container')
 const lighteText = document.querySelector('.lighten')
@@ -113,12 +112,21 @@ slider.addEventListener('input', checkSlider)
 function checkSlider() {
     // Check if the hex color valid
     if(!isValidHex(hexInput.value)) return;
-    sliderText.textContent=`${slider.value + "%"}`
+
+    sliderText.textContent=`${slider.value}%`
+
+    // calculate the appropriate valjue for the color alteration
+    // between positive and negative
+    const valueAlteredColor = 
+    toggleBtn.classList.contains('change') ?
+    -slider.value
+    : slider.value
+
     // get the altered hex value (call altere functiopn and update altered box)
-    const alterHex = alterColor(hexInput.value, slider.value)
+    const alterHex = alterColor(hexInput.value, valueAlteredColor)
     // update the backgrundcolor on alterBox
     alterBox.style.backgroundColor =alterHex
-    alterColoText.innerText = `Altered Color  ${alterHex}` 
+    alterColoText.innerText = `Altered Color ${alterHex}` 
 }
 
 /* Challenge 5 
@@ -156,19 +164,19 @@ const alterColor = (hex, percentage ) => {
 
 // Toggle button
 
-toggleBtn.addEventListener('click', toggleButton)
+toggleBtn.addEventListener('click', changeButton)
 
-function toggleButton() {
+function changeButton() {
     
-    if(innerBtn.classList.contains('change')) {
+    if(toggleBtn.classList.contains('change')) {
        // lighteText.classList.add('uselected')
-        innerBtn.classList.remove('change')
+        toggleBtn.classList.remove('change')
         lighteText.classList.remove('unselected')
         darkenText.classList.add('unselected')
 
     }
     else {
-        innerBtn.classList.add('change')
+        toggleBtn.classList.add('change')
         lighteText.classList.add('unselected')
         darkenText.classList.remove('unselected')
         

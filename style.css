@@ -54,7 +54,7 @@ input[type="range"] {
   color: var(--secondary);
 }
 p {
-  margin: 0.8rem 0;
+  margin: 0.8rem 0.8rem;
 }
 .box {
   width: 100%;
@@ -64,39 +64,30 @@ p {
 .toggle {
   display: flex;
   align-items: center;
+  margin: 10px 0;
 }
 .toggle-btn {
-  position: relative;
-
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  width: 2.5rem;
-  height: 1.4rem;
+  width: 60px;
+  height: 30px;
   background-color: var(--secondary);
-  border: 1px solid #333;
+  border-radius: 30px;
 
   transition: 0.3s ease-in-out;
-  margin: 0 0.5rem;
 }
 .inner-circle {
-  position: absolute;
-  display: block;
   border-radius: 50%;
-  width: 1rem;
-  height: 1rem;
+  width: 30px;
+  height: 30px;
   background-color: #fff;
+  transition: all 0.3s;
+}
 
-  top: 13%;
-  margin: 0;
-}
-.change {
-  transition: 0.3s ease-in-out;
-  transform: translateX(100%);
-  background-color: #333;
-}
 .unselected {
   opacity: 0.35;
   transition: 0.3s ease-in-out;
+}
+.toggle-btn.change > .inner-circle {
+  transition: 0.3s ease-in-out;
+  transform: translateX(30px);
+  background-color: #333;
 }
